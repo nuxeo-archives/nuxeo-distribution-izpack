@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Packs">
+  <!-- <taskdef resource="net/sf/antcontrib/antlib.xml" /> -->
+
+  <target name="init" unless="init.done">
+    <property name="init.done" value="true" />
+
+    <condition property="osfamily-mac">
+      <os family="mac" />
+    </condition>
+    <condition property="osfamily-unix">
+      <and>
+        <os family="unix" />
+        <not>
+          <os family="mac" />
+        </not>
+      </and>
+    </condition>
+    <condition property="osfamily-windows">
+      <os family="windows" />
+    </condition>
+  </target>
+
+  <target name="beforeAppInstall" depends="init">
+  </target>
+  <target name="afterAppInstall" depends="init">
+  </target>
+
+  <target name="openoffice-install" depends="init">
+  </target>
+
+  <target name="libreoffice-install" depends="init,libreoffice-install-windows,libreoffice-install-mac">
+  </target>
+  <target name="libreoffice-install-windows" if="osfamily-windows">
+    <mkdir dir="${install.dir}/3rdParty-installers" />
+    <get skipexisting="true"
+      src="http://download.documentfoundation.org/libreoffice/stable/3.3.2/win/x86/LibO_3.3.2_Win_x86_install_multi.exe"
+      dest="${install.dir}/3rdParty-installers/LibO_3.3.2_Win_x86_install_multi.exe" />
+  </target>
+  <target name="libreoffice-install-mac" if="osfamily-mac">
+    <mkdir dir="${install.dir}/3rdParty-installers" />
+    <get
+      src="http://download.documentfoundation.org/libreoffice/stable/3.3.2/mac/x86/LibO_3.3.2_MacOS_x86_install_en-US.dmg"
+      dest="${install.dir}/3rdParty-installers/LibO_3.3.2_MacOS_x86_install_en-US.dmg" />
+  </target>
+  <target name="libreoffice-install-unix" if="osfamily-unix">
+    <exec executable="gksudo apt-get install libreoffice" />
+  </target>
+
+  <target name="pdftohtml-install" depends="init">
+  </target>
+  <target name="postgresql-install" depends="init">
+  </target>
+
+</project>

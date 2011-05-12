@@ -1,0 +1,153 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.nuxeo.ecm.distribution</groupId>
+    <artifactId>nuxeo-distribution</artifactId>
+    <version>5.4.2-SNAPSHOT</version>
+  </parent>
+
+  <groupId>org.nuxeo.ecm.distribution</groupId>
+  <artifactId>nuxeo-distribution-izpack</artifactId>
+  <name>Nuxeo Distribution IzPack Installer</name>
+  <description>Build an IzPack installer from a Nuxeo EP zip archive.</description>
+  <packaging>pom</packaging>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <staging.dir>${project.build.directory}/staging</staging.dir>
+    <nuxeo.version>5.4.2-SNAPSHOT</nuxeo.version>
+  </properties>
+
+  <issueManagement>
+    <system>jira</system>
+    <url>http://jira.nuxeo.org/browse/NXBT</url>
+  </issueManagement>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.apache.ant</groupId>
+        <artifactId>ant</artifactId>
+        <version>1.8.2</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.ant</groupId>
+        <artifactId>ant-launcher</artifactId>
+        <version>1.8.2</version>
+      </dependency>
+      <!-- <dependency> -->
+      <!-- <groupId>ant-contrib</groupId> -->
+      <!-- <artifactId>ant-contrib</artifactId> -->
+      <!-- <version>1.0b3</version> -->
+      <!-- <exclusions> -->
+      <!-- <exclusion> -->
+      <!-- <groupId>ant</groupId> -->
+      <!-- <artifactId>ant</artifactId> -->
+      <!-- </exclusion> -->
+      <!-- </exclusions> -->
+      <!-- </dependency> -->
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.codehaus.izpack</groupId>
+          <artifactId>izpack-maven-plugin</artifactId>
+          <version>5.0.0-beta7</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
+    <plugins>
+      <plugin>
+        <groupId>org.nuxeo.build</groupId>
+        <artifactId>nuxeo-distribution-tools</artifactId>
+        <configuration>
+          <buildFile>${basedir}/src/main/assemble/assembly.xml</buildFile>
+        </configuration>
+        <executions>
+          <execution>
+            <id>process-resources</id>
+            <goals>
+              <goal>build</goal>
+            </goals>
+            <phase>process-resources</phase>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.izpack</groupId>
+        <artifactId>izpack-maven-plugin</artifactId>
+        <configuration>
+          <descriptorEncoding>UTF-8</descriptorEncoding>
+        </configuration>
+        <executions>
+          <execution>
+            <id>nuxeo-dm-tomcat-installer</id>
+            <phase>package</phase>
+            <goals>
+              <goal>izpack</goal>
+            </goals>
+            <configuration>
+              <baseDir>${staging.dir}/nuxeo-dm-tomcat</baseDir>
+              <installFile>${staging.dir}/nuxeo-dm-tomcat/install.xml</installFile>
+              <output>${project.build.directory}/nuxeo-dm-${nuxeo.version}-tomcat-izpack-installer.jar</output>
+            </configuration>
+          </execution>
+          <execution>
+            <id>nuxeo-cap-tomcat-installer</id>
+            <phase>package</phase>
+            <goals>
+              <goal>izpack</goal>
+            </goals>
+            <configuration>
+              <baseDir>${staging.dir}/nuxeo-cap-tomcat</baseDir>
+              <installFile>${staging.dir}/nuxeo-cap-tomcat/install.xml</installFile>
+              <output>${project.build.directory}/nuxeo-cap-${nuxeo.version}-tomcat-izpack-installer.jar</output>
+            </configuration>
+          </execution>
+          <execution>
+            <id>coreserver-tomcat-installer</id>
+            <phase>package</phase>
+            <goals>
+              <goal>izpack</goal>
+            </goals>
+            <configuration>
+              <baseDir>${staging.dir}/nuxeo-coreserver-tomcat</baseDir>
+              <installFile>${staging.dir}/nuxeo-coreserver-tomcat/install.xml</installFile>
+              <output>${project.build.directory}/nuxeo-coreserver-${nuxeo.version}-tomcat-izpack-installer.jar</output>
+            </configuration>
+          </execution>
+          <!-- <execution> -->
+          <!-- <id>nuxeo-dm-jboss-installer</id> -->
+          <!-- <phase>package</phase> -->
+          <!-- <goals> -->
+          <!-- <goal>izpack</goal> -->
+          <!-- </goals> -->
+          <!-- <configuration> -->
+          <!-- <baseDir>${staging.dir}/nuxeo-dm-jboss</baseDir> -->
+          <!-- <installFile>${staging.dir}/nuxeo-dm-jboss/install.xml</installFile> -->
+          <!-- <output>${project.build.directory}/nuxeo-dm-${nuxeo.version}-jboss-izpack-installer.jar</output> -->
+          <!-- </configuration> -->
+          <!-- </execution> -->
+          <!-- <execution> -->
+          <!-- <id>nuxeo-cap-jboss-installer</id> -->
+          <!-- <phase>package</phase> -->
+          <!-- <goals> -->
+          <!-- <goal>izpack</goal> -->
+          <!-- </goals> -->
+          <!-- <configuration> -->
+          <!-- <baseDir>${staging.dir}/nuxeo-cap-jboss</baseDir> -->
+          <!-- <installFile>${staging.dir}/nuxeo-cap-jboss/install.xml</installFile> -->
+          <!-- <output>${project.build.directory}/nuxeo-dm-${nuxeo.version}-jboss-izpack-installer.jar</output> -->
+          <!-- </configuration> -->
+          <!-- </execution> -->
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

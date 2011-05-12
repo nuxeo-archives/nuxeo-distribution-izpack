@@ -1,0 +1,104 @@
+<project name="nuxeo-assembly"
+         default="build"
+         xmlns:nx="urn:nuxeo-build"
+         xmlns:artifact="urn:nuxeo-artifact">
+  <taskdef resource="org/nuxeo/build/antlib.xml" uri="urn:nuxeo-build" />
+  <taskdef resource="org/nuxeo/build/artifact/antlib.xml"
+           uri="urn:nuxeo-artifact" />
+
+  <target name="init" unless="init.done">
+    <tstamp />
+    <property name="init.done" value="true" />
+  </target>
+
+  <target name="build" depends="init,download-sources" unless="no.build">
+    <artifact:attach file="pom.xml"
+                     target="${maven.project.groupId}:${maven.project.artifactId}"
+                     type="pom" />
+    <copy tofile="${staging.dir}/ant.jar" overwrite="true">
+      <artifact:resolveFile key="org.apache.ant:ant" />
+    </copy>
+    <copy tofile="${staging.dir}/ant-launcher.jar" overwrite="true">
+      <artifact:resolveFile key="org.apache.ant:ant-launcher" />
+    </copy>
+    <!--
+    <copy tofile="${staging.dir}/ant-contrib.jar" overwrite="true">
+      <artifact:resolveFile key="ant-contrib:ant-contrib" />
+    </copy>
+    -->
+    <antcall target="prepare-izpack-resources">
+      <param name="product.name" value="Nuxeo DM" />
+      <param name="product.basename" value="nuxeo-dm" />
+      <param name="server" value="tomcat" />
+      <param name="key"
+             value="org.nuxeo.ecm.distribution:nuxeo-distribution-tomcat" />
+      <param name="classifier" value="nuxeo-dm" />
+    </antcall>
+    <antcall target="prepare-izpack-resources">
+      <param name="product.name" value="Nuxeo CAP" />
+      <param name="product.basename" value="nuxeo-cap" />
+      <param name="server" value="tomcat" />
+      <param name="key"
+             value="org.nuxeo.ecm.distribution:nuxeo-distribution-tomcat" />
+      <param name="classifier" value="nuxeo-cap" />
+    </antcall>
+    <antcall target="prepare-izpack-resources">
+      <param name="product.name" value="Nuxeo CoreServer" />
+      <param name="product.basename" value="nuxeo-coreserver" />
+      <param name="server" value="tomcat" />
+      <param name="key"
+             value="org.nuxeo.ecm.distribution:nuxeo-distribution-tomcat" />
+      <param name="classifier" value="coreserver" />
+    </antcall>
+    <!--
+    <antcall target="prepare-izpack-resources">
+      <param name="product.name" value="Nuxeo DM" />
+      <param name="product.basename" value="nuxeo-dm" />
+      <param name="server" value="jboss" />
+    </antcall>
+    <antcall target="prepare-izpack-resources">
+      <param name="product.name" value="Nuxeo CAP" />
+      <param name="product.basename" value="nuxeo-cap" />
+      <param name="server" value="jboss" />
+    </antcall>
+    -->
+  </target>
+
+  <target name="prepare-izpack-resources">
+    <echo>Preparing ${product.name} ${server} installer...</echo>
+    <unzip dest="${staging.dir}/${product.basename}-${server}">
+      <artifact:resolveFile key="${key}:${nuxeo.version}:zip"
+                            classifier="${classifier}" />
+    </unzip>
+    <copy todir="${staging.dir}/${product.basename}-${server}" overwrite="true">
+      <fileset dir="${basedir}/src/main/izpack">
+        <exclude name="**/*.xml" />
+      </fileset>
+    </copy>
+    <copy todir="${staging.dir}/${product.basename}-${server}" overwrite="true">
+      <fileset dir="${basedir}/src/main/izpack">
+        <include name="**/*.xml" />
+      </fileset>
+      <filterset>
+        <filter token="SERVER" value="${server}" />
+        <filter token="PRODUCT_NAME" value="${product.name}" />
+        <filter token="PRODUCT_VERSION" value="${nuxeo.version}" />
+        <filter token="PRODUCT_BASEDIR"
+                value="${product.basename}-${nuxeo.version}-${server}" />
+      </filterset>
+    </copy>
+  </target>
+
+  <target name="download-sources">
+    <echo>Downloading Nuxeo sources...</echo>
+    <get src="http://community.nuxeo.com/static/latest-release/sources"
+         dest="${staging.dir}/nuxeo-5.4.1-sources.zip"
+         ignoreerrors="true" />
+    <!--
+    <unzip src="${maven.project.build.directory}/nuxeo-5.4.1-sources.zip"
+           overwrite="false"
+           dest="${staging.dir}/nuxeo-${nuxeo.version}-sources" />
+     -->
+  </target>
+
+</project>

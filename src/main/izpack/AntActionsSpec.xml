@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<antactions>
+
+  <pack name="@PRODUCT_NAME@">
+    <antcall order="beforepack" buildresource="AntInstall.xml" quiet="no">
+      <property name="install.dir" value="$INSTALL_PATH" />
+      <target name="beforeAppInstall" />
+    </antcall>
+    <antcall order="afterpack" buildresource="AntInstall.xml" quiet="no">
+      <target name="afterAppInstall" />
+    </antcall>
+  </pack>
+  <pack name="OpenOffice">
+    <antcall order="afterpack" buildresource="AntInstall.xml" quiet="no">
+      <property name="install.dir" value="$INSTALL_PATH" />
+      <target name="openoffice-install" />
+    </antcall>
+  </pack>
+  <pack name="LibreOffice">
+    <antcall order="beforepack" buildresource="AntInstall.xml" quiet="no">
+      <property name="install.dir" value="$INSTALL_PATH" />
+      <target name="libreoffice-install" />
+    </antcall>
+  </pack>
+  <pack name="PDFtoHTML">
+    <antcall order="afterpack" buildresource="AntInstall.xml" quiet="no">
+      <property name="install.dir" value="$INSTALL_PATH" />
+      <target name="pdftohtml-install" />
+    </antcall>
+  </pack>
+  <pack name="PostgreSQL">
+    <antcall order="afterpack" buildresource="AntInstall.xml" quiet="no">
+      <property name="install.dir" value="$INSTALL_PATH" />
+      <target name="postgresql-install" />
+    </antcall>
+  </pack>
+
+</antactions>

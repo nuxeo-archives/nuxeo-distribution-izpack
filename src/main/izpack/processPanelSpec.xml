@@ -1,0 +1,9 @@
+<processing>
+    <logfiledir>$INSTALL_PATH/log/</logfiledir>
+    <job name="postinstall">
+        <os family="Unix"/>
+<!--         <executefile name="$INSTALL_PATH/bin/postinstall"> -->
+<!--             <arg>nuxeo.data.dir=${nuxeo.data.dir}</arg> -->
+<!--         </executefile> -->
+    </job>
+</processing>

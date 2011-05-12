@@ -1,0 +1,23 @@
+<userInput>
+    <panel order="0">
+        <field size="2" txt="Main parameters" type="title"/>
+        <field type="combo" variable="nuxeo.templates">
+            <spec txt="Database">
+                <choice set="true" txt="Default" value="default"/>
+                <choice txt="PostgreSQL" value="postgresql"/>
+            </spec>
+        </field>
+        <field type="text" variable="nuxeo.bind.address">
+            <description align="left" txt="Adresse IP qui sera utilisée"/>
+            <spec set="0.0.0.0" size="15" txt="IP address"/>
+        </field>
+        <field align="left" txt="Log directory" type="staticText"/>
+        <field align="left" type="dir" variable="nuxeo.log.dir">
+            <spec set="log" size="25" txt=""/>
+        </field>
+        <field align="left" txt="Data directory" type="staticText"/>
+        <field align="left" type="file" variable="nuxeo.data.dir">
+            <spec set="data" size="25" txt=""/>
+        </field>
+    </panel>
+</userInput>
