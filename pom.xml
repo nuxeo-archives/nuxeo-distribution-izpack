@@ -11,6 +11,7 @@
   <artifactId>nuxeo-distribution-izpack</artifactId>
   <name>Nuxeo Distribution IzPack Installer</name>
   <description>Build an IzPack installer from a Nuxeo EP zip archive.</description>
+  <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <properties>
