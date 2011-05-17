@@ -18,7 +18,32 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <staging.dir>${project.build.directory}/staging</staging.dir>
     <nuxeo.version>${nuxeo.distribution.version}</nuxeo.version>
+    <keystore.type>JKS</keystore.type>
+    <keystore.alias>nuxeocom</keystore.alias>
   </properties>
+
+  <profiles>
+    <profile>
+      <id>release</id>
+      <properties>
+        <keystore.type>JKS</keystore.type>
+        <keystore.alias>nuxeocom</keystore.alias>
+      </properties>
+    </profile>
+    <profile>
+      <!-- development profile - do not use it in production mode -->
+      <id>dev</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <keystore.path>nuxeo-dev.jks</keystore.path>
+        <keystore.type>JKS</keystore.type>
+        <keystore.alias>nuxeo-dev</keystore.alias>
+        <keystore.password>nuxeodev</keystore.password>
+      </properties>
+    </profile>
+  </profiles>
 
   <issueManagement>
     <system>jira</system>
@@ -147,6 +172,27 @@
           <!-- </configuration> -->
           <!-- </execution> -->
         </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-jarsigner-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>sign</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <archiveDirectory>${project.build.directory}</archiveDirectory>
+          <includes>
+            <include>*.jar</include>
+          </includes>
+          <storetype>${keystore.type}</storetype>
+          <keystore>${keystore.path}</keystore>
+          <alias>${keystore.alias}</alias>
+          <storepass>${keystore.password}</storepass>
+        </configuration>
       </plugin>
     </plugins>
   </build>
