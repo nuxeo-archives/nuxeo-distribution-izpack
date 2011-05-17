@@ -12,7 +12,9 @@
     <property name="init.done" value="true" />
   </target>
 
-  <target name="build" depends="init,download-sources,unzip-local-sources" unless="no.build">
+  <target name="build"
+          depends="init,download-sources,unzip-local-sources"
+          unless="no.build">
     <artifact:attach file="pom.xml"
                      target="${maven.project.groupId}:${maven.project.artifactId}"
                      type="pom" />
