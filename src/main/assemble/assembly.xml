@@ -9,6 +9,7 @@
   <target name="init" unless="init.done">
     <tstamp />
     <available file="${zip.dir}" type="dir" property="local.zip" />
+    <mkdir dir="${staging.dir}" />
     <property name="init.done" value="true" />
   </target>
 
@@ -104,8 +105,7 @@
 
   <target name="download-sources" unless="local.zip">
     <get src="http://community.nuxeo.com/static/latest-release/sources"
-         dest="${staging.dir}/nuxeo-${nuxeo.version}-sources.zip"
-         ignoreerrors="true" />
+         dest="${maven.project.build.directory}/nuxeo-${nuxeo.version}-sources.zip" />
     <unzip src="${maven.project.build.directory}/nuxeo-${nuxeo.version}-sources.zip"
            overwrite="false"
            dest="${staging.dir}/nuxeo-${nuxeo.version}-sources" />
