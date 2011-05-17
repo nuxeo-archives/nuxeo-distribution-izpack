@@ -8,6 +8,7 @@
 
   <target name="init" unless="init.done">
     <tstamp />
+    <available file="${zip.dir}" type="dir" property="local.zip" />
     <property name="init.done" value="true" />
   </target>
 
@@ -66,10 +67,8 @@
 
   <target name="prepare-izpack-resources">
     <echo>Preparing ${product.name} ${server} installer...</echo>
-    <unzip dest="${staging.dir}/${product.basename}-${server}">
-      <artifact:resolveFile key="${key}:${nuxeo.version}:zip"
-                            classifier="${classifier}" />
-    </unzip>
+    <antcall target="download" />
+    <antcall target="unzip-local" />
     <copy todir="${staging.dir}/${product.basename}-${server}" overwrite="true">
       <fileset dir="${basedir}/src/main/izpack">
         <exclude name="**/*.xml" />
@@ -89,16 +88,26 @@
     </copy>
   </target>
 
+  <target name="download" unless="local.zip">
+    <unzip dest="${staging.dir}/${product.basename}-${server}">
+      <artifact:resolveFile key="${key}:${nuxeo.version}:zip"
+                            classifier="${classifier}" />
+    </unzip>
+  </target>
+  <target name="unzip-local" if="local.zip">
+    <echo message="Using local archive ${zip.dir}" />
+    <unzip dest="${staging.dir}/${product.basename}-${server}"
+           src="${zip.dir}/${product.basename}-${nuxeo.version}-${server}.zip" />
+  </target>
+
   <target name="download-sources">
     <echo>Downloading Nuxeo sources...</echo>
     <get src="http://community.nuxeo.com/static/latest-release/sources"
-         dest="${staging.dir}/nuxeo-5.4.1-sources.zip"
+         dest="${staging.dir}/nuxeo-${nuxeo.version}-sources.zip"
          ignoreerrors="true" />
-    <!--
-    <unzip src="${maven.project.build.directory}/nuxeo-5.4.1-sources.zip"
+    <unzip src="${maven.project.build.directory}/nuxeo-${nuxeo.version}-sources.zip"
            overwrite="false"
            dest="${staging.dir}/nuxeo-${nuxeo.version}-sources" />
-     -->
   </target>
 
 </project>
