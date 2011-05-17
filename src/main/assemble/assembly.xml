@@ -12,7 +12,7 @@
     <property name="init.done" value="true" />
   </target>
 
-  <target name="build" depends="init,download-sources" unless="no.build">
+  <target name="build" depends="init,download-sources,unzip-local-sources" unless="no.build">
     <artifact:attach file="pom.xml"
                      target="${maven.project.groupId}:${maven.project.artifactId}"
                      type="pom" />
@@ -100,14 +100,18 @@
            src="${zip.dir}/${product.basename}-${nuxeo.version}-${server}.zip" />
   </target>
 
-  <target name="download-sources">
-    <echo>Downloading Nuxeo sources...</echo>
+  <target name="download-sources" unless="local.zip">
     <get src="http://community.nuxeo.com/static/latest-release/sources"
          dest="${staging.dir}/nuxeo-${nuxeo.version}-sources.zip"
          ignoreerrors="true" />
     <unzip src="${maven.project.build.directory}/nuxeo-${nuxeo.version}-sources.zip"
            overwrite="false"
            dest="${staging.dir}/nuxeo-${nuxeo.version}-sources" />
+  </target>
+  <target name="unzip-local-sources" if="local.zip">
+    <echo message="Using local archive ${zip.dir}" />
+    <unzip dest="${staging.dir}/nuxeo-${nuxeo.version}-sources"
+           src="${zip.dir}/nuxeo-${nuxeo.version}-sources.zip" />
   </target>
 
 </project>
