@@ -17,7 +17,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <staging.dir>${project.build.directory}/staging</staging.dir>
-    <nuxeo.version>5.4.2-SNAPSHOT</nuxeo.version>
+    <nuxeo.version>${nuxeo.distribution.version}</nuxeo.version>
   </properties>
 
   <issueManagement>
