@@ -81,7 +81,7 @@
     <panel classname="ShortcutPanel" />
     <!-- <panel classname="UserInputPanel" /> -->
     <!-- For debugging purpose only -->
-    <panel classname="DataCheckPanel" />
+    <!-- <panel classname="DataCheckPanel" /> -->
     <panel classname="SummaryPanel" />
     <panel classname="InstallPanel" />
     <!-- <panel classname="ProcessPanel" /> -->
@@ -154,7 +154,7 @@
       installGroups="Nuxeo">
       <description>The Nuxeo server source is available as required by the LGPL.
       </description>
-      <file src="../nuxeo-5.4.1-sources.zip" targetdir="$INSTALL_PATH/sources"
+      <file src="../nuxeo-@PRODUCT_VERSION@-sources.zip" targetdir="$INSTALL_PATH/sources"
         unpack="true" />
     </pack>
   </packs>
