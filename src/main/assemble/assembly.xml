@@ -105,8 +105,8 @@
 
   <target name="download-sources" unless="local.zip">
     <get src="http://community.nuxeo.com/static/latest-release/sources"
-         dest="${maven.project.build.directory}/nuxeo-${nuxeo.version}-sources.zip" />
-    <unzip src="${maven.project.build.directory}/nuxeo-${nuxeo.version}-sources.zip"
+         dest="${staging.dir}/nuxeo-${nuxeo.version}-sources.zip" />
+    <unzip src="${staging.dir}/nuxeo-${nuxeo.version}-sources.zip"
            overwrite="false"
            dest="${staging.dir}/nuxeo-${nuxeo.version}-sources" />
   </target>
