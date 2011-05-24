@@ -50,6 +50,12 @@
     <url>http://jira.nuxeo.org/browse/NXBT</url>
   </issueManagement>
 
+  <scm>
+    <connection>scm:git:git://github.com/nuxeo/nuxeo-distribution-izpack.git</connection>
+    <developerConnection>scm:git:https://github.com/nuxeo/nuxeo-distribution-izpack.git</developerConnection>
+    <url>https://github.com/nuxeo/nuxeo-distribution-izpack</url>
+  </scm>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -82,7 +88,8 @@
         <plugin>
           <groupId>org.codehaus.izpack</groupId>
           <artifactId>izpack-maven-plugin</artifactId>
-          <version>5.0.0-beta7</version>
+          <version>5.0.0-beta8-SNAPSHOT</version>
+          <!-- <version>5.0.0-beta7</version> -->
         </plugin>
       </plugins>
     </pluginManagement>
