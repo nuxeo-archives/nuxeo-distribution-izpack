@@ -18,14 +18,13 @@
 ## Shell script calling IzPack Python tool for generating Windows exe from jar
 ##
 
-IZPACK_WRAPPERS_PATH=/opt/build/tools/izpack/utils/wrappers/
+: ${IZPACK_WRAPPERS_PATH:=/opt/build/tools/izpack/utils/wrappers/}
 
 for jarinstaller in target/nuxeo*.jar; do
     FILENAME=`basename $jarinstaller`
-    NXVERSION=${FILENAME#nuxeo-[az]*-}
-    NXVERSION=${VERSION%-(tomcat|jboss)*.jar}
-    PREFIX=${FILENAME%$NXVERSION*}
-    SUFFIX=${FILENAME#*$NXVERSION}
-    SUFFIX=${SUFFIX%.jar}
+    [[ "$FILENAME" =~ ([^0-9]+-)([0-9\.]+-[^-]+)(-.*).jar ]]
+    PREFIX=${BASH_REMATCH[1]}
+    NXVERSION=${BASH_REMATCH[2]}
+    SUFFIX=${BASH_REMATCH[3]}
     python $IZPACK_WRAPPERS_PATH/izpack2exe/izpack2exe.py --file=target/$PREFIX$NXVERSION$SUFFIX.jar --output=target/$PREFIX$NXVERSION$SUFFIX.exe
 done

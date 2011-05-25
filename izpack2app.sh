@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 ##
 ## (C) Copyright 2010 Nuxeo SAS (http://nuxeo.com/) and contributors.
 ##
@@ -18,15 +18,14 @@
 ## Shell script calling IzPack Python tool for generating Mac OS X app from jar
 ##
 
-IZPACK_WRAPPERS_PATH=/opt/build/tools/izpack/utils/wrappers/
+: ${IZPACK_WRAPPERS_PATH:=/opt/build/tools/izpack/utils/wrappers/}
 
 for jarinstaller in target/nuxeo*.jar; do
     FILENAME=`basename $jarinstaller`
-    NXVERSION=${FILENAME#nuxeo-[az]*-}
-    NXVERSION=${VERSION%-(tomcat|jboss)*.jar}
-    PREFIX=${FILENAME%$NXVERSION*}
-    SUFFIX=${FILENAME#*$NXVERSION}
-    SUFFIX=${SUFFIX%.jar}
+    [[ "$FILENAME" =~ ([^0-9]+-)([0-9\.]+-[^-]+)(-.*).jar ]]
+    PREFIX=${BASH_REMATCH[1]}
+    NXVERSION=${BASH_REMATCH[2]}
+    SUFFIX=${BASH_REMATCH[3]}
     python $IZPACK_WRAPPERS_PATH/izpack2app/izpack2app.py target/$PREFIX$NXVERSION$SUFFIX.jar target/$PREFIX$NXVERSION$SUFFIX_.app
     cd target/$PREFIX$NXVERSION$SUFFIX_.app && zip -r ../$PREFIX$NXVERSION$SUFFIX.app . ; cd -
 done

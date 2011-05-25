@@ -18,17 +18,16 @@
 ## Shell script calling IzPack Python tool for generating JNLP from jar
 ##
 
-IZPACK_WRAPPERS_PATH=/opt/build/tools/izpack/utils/wrappers/
+: ${IZPACK_WRAPPERS_PATH:=/opt/build/tools/izpack/utils/wrappers/}
 : ${CODEBASE_URL:="file://"$(cd "$(dirname "$0")"; pwd -P)}
 
 cd target/
 for jarinstaller in target/nuxeo*.jar; do
     FILENAME=`basename $jarinstaller`
-    NXVERSION=${FILENAME#nuxeo-[az]*-}
-    NXVERSION=${VERSION%-(tomcat|jboss)*.jar}
-    PREFIX=${FILENAME%$NXVERSION*}
-    SUFFIX=${FILENAME#*$NXVERSION}
-    SUFFIX=${SUFFIX%.jar}
+    [[ "$FILENAME" =~ ([^0-9]+-)([0-9\.]+-[^-]+)(-.*).jar ]]
+    PREFIX=${BASH_REMATCH[1]}
+    NXVERSION=${BASH_REMATCH[2]}
+    SUFFIX=${BASH_REMATCH[3]}
     python $IZPACK_WRAPPERS_PATH/izpack2jnlp/izpack2jnlp.py --codebase=$CODEBASE_URL --jnlp=$PREFIX$NXVERSION$SUFFIX.jnlp --installer=$PREFIX$NXVERSION$SUFFIX.jar --title="$PREFIX" --vendor=Nuxeo --homepage=http://www.nuxeo.com/ --description="$PREFIX $NXVERSION"
 done
 cd -
