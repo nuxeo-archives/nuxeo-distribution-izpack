@@ -22,12 +22,13 @@
 : ${CODEBASE_URL:="file://"$(cd "$(dirname "$0")"; pwd -P)}
 
 cd target/
-for jarinstaller in target/nuxeo*.jar; do
+for jarinstaller in nuxeo*.jar; do
     FILENAME=`basename $jarinstaller`
     [[ "$FILENAME" =~ ([^0-9]+-)([0-9\.]+-[^-]+)(-.*).jar ]]
     PREFIX=${BASH_REMATCH[1]}
     NXVERSION=${BASH_REMATCH[2]}
     SUFFIX=${BASH_REMATCH[3]}
-    python $IZPACK_WRAPPERS_PATH/izpack2jnlp/izpack2jnlp.py --codebase=$CODEBASE_URL --jnlp=$PREFIX$NXVERSION$SUFFIX.jnlp --installer=$PREFIX$NXVERSION$SUFFIX.jar --title="$PREFIX" --vendor=Nuxeo --homepage=http://www.nuxeo.com/ --description="$PREFIX $NXVERSION"
+    TITLE=${PREFIX%-}
+    python $IZPACK_WRAPPERS_PATH/izpack2jnlp/izpack2jnlp.py --codebase=$CODEBASE_URL --jnlp=$PREFIX$NXVERSION$SUFFIX.jnlp --installer=$PREFIX$NXVERSION$SUFFIX.jar --title="$TITLE" --vendor=Nuxeo --homepage="http://www.nuxeo.com/" --description="$TITLE $NXVERSION"
 done
 cd -
