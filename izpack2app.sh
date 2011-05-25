@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 ##
 ## (C) Copyright 2010 Nuxeo SAS (http://nuxeo.com/) and contributors.
 ##
