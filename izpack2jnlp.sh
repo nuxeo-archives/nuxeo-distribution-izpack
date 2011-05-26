@@ -19,7 +19,7 @@
 ##
 
 : ${IZPACK_WRAPPERS_PATH:=/opt/build/tools/izpack/utils/wrappers/}
-: ${CODEBASE_URL:="file://"$(cd "$(dirname "$0")"; pwd -P)}
+: ${CODEBASE_URL:=file://$(cd $(dirname "$0"); pwd -P)/target/}
 
 cd target/
 for jarinstaller in nuxeo*.jar; do
