@@ -72,6 +72,10 @@
     <echo>Preparing ${product.name} ${server} installer...</echo>
     <antcall target="download" />
     <antcall target="unzip-local" />
+    <echo append="true"
+          file="${staging.dir}/${product.basename}-${server}/${product.basename}-${nuxeo.version}-${server}/templates/common/config/distribution.properties">
+org.nuxeo.distribution.package=izpack
+    </echo>
     <copy todir="${staging.dir}/${product.basename}-${server}" overwrite="true">
       <fileset dir="${basedir}/src/main/izpack">
         <exclude name="**/*.xml" />
