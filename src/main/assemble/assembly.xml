@@ -8,7 +8,14 @@
 
   <target name="init" unless="init.done">
     <tstamp />
-    <available file="${zip.dir}" type="dir" property="local.zip" />
+    <condition property="local.zip">
+      <and>
+        <available file="${zip.dir}" type="dir" />
+        <not>
+          <equals arg1="${zip.dir}" arg2="" trim="true" />
+        </not>
+      </and>
+    </condition>
     <mkdir dir="${staging.dir}" />
     <property name="init.done" value="true" />
   </target>
