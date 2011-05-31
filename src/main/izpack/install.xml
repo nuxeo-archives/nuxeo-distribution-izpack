@@ -19,7 +19,7 @@
     <uninstaller path="${INSTALL_PATH}/bin/" name="uninstaller.jar" />
     <rebootaction>notice</rebootaction>
   </info>
-  <guiprefs width="640" height="480" resizable="yes" splash="images/logo_nuxeo.png">
+  <guiprefs width="800" height="580" resizable="yes" splash="images/logo_nuxeo.png">
     <modifier key="useFlags" value="yes" />
     <modifier key="langDisplayType" value="native" />
     <modifier key="headingPanelCounter" value="progressbar" />
