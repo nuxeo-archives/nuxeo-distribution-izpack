@@ -101,6 +101,24 @@
       installGroups="Nuxeo">
       <description>@PRODUCT_NAME@ @PRODUCT_VERSION@ @SERVER@</description>
       <fileset dir="@PRODUCT_BASEDIR@" targetdir="$INSTALL_PATH" />
+      <file src="images/icon-controlpanel.png" targetDir="$INSTALL_PATH/images/">
+        <os family="unix" />
+      </file>
+      <file src="images/icon-start.png" targetDir="$INSTALL_PATH/images/">
+        <os family="unix" />
+      </file>
+      <file src="images/icon-stop.png" targetDir="$INSTALL_PATH/images/">
+        <os family="unix" />
+      </file>
+      <file src="images/icon-controlpanel.ico" targetDir="$INSTALL_PATH/images/">
+        <os family="windows" />
+      </file>
+      <file src="images/icon-start.ico" targetDir="$INSTALL_PATH/images/">
+        <os family="windows" />
+      </file>
+      <file src="images/icon-stop.ico" targetDir="$INSTALL_PATH/images/">
+        <os family="windows" />
+      </file>
       <executable failure="warn" keep="true" stage="never"
         targetfile="$INSTALL_PATH/bin/monitorctl.sh" />
       <executable failure="warn" keep="true" stage="never"
@@ -170,9 +188,11 @@
     </listener>
     <listener classname="AntActionInstallerListener" stage="install" />
   </listeners>
-  <!-- <native name="ShellLink.dll" type="izpack" /> -->
-  <!-- <native name="ShellLink_x64.dll" type="izpack" /> -->
-  <!-- <native type="3rdparty" name="COIOSHelper.dll" stage="both"> -->
-  <!-- <os family="windows" /> -->
-  <!-- </native> -->
+  <natives>
+    <native name="ShellLink.dll" type="izpack" />
+    <native name="ShellLink_x64.dll" type="izpack" />
+    <native type="3rdparty" name="COIOSHelper.dll" stage="both">
+      <os family="windows" />
+    </native>
+  </natives>
 </installation>

@@ -3,30 +3,30 @@
   <skipIfNotSupported />
   <defaultCurrentUser />
   <programGroup defaultName="@PRODUCT_NAME@ @PRODUCT_VERSION@"
-    location="applications" />
+    location="startMenu" />
   <shortcut applications="no" commandLine="gui" description="Nuxeo Control Panel"
-    desktop="yes" iconFile="images/icon-controlpanel.ico" iconIndex="0"
-    initialState="normal" name="Nuxeo Control Panel" programGroup="yes"
+    desktop="yes" iconFile="$INSTALL_PATH/images/icon-controlpanel.ico"
+    iconIndex="0" initialState="normal" name="Nuxeo Control Panel" programGroup="yes"
     startMenu="no" startup="no" target="$INSTALL_PATH/bin/nuxeoctl"
     workingDirectory="$INSTALL_PATH">
     <createForPack name="@PRODUCT_NAME@" />
   </shortcut>
   <shortcut applications="no" commandLine="gui start" description="Start Nuxeo"
-    desktop="yes" iconFile="images/icon-start.ico" iconIndex="0" initialState="noShow"
-    name="Start Nuxeo" programGroup="yes" startMenu="no" startup="no"
-    target="$INSTALL_PATH/bin/nuxeoctl" workingDirectory="$INSTALL_PATH">
+    desktop="yes" iconFile="$INSTALL_PATH/images/icon-start.ico" iconIndex="0"
+    initialState="noShow" name="Start Nuxeo" programGroup="yes" startMenu="no"
+    startup="no" target="$INSTALL_PATH/bin/nuxeoctl" workingDirectory="$INSTALL_PATH">
     <createForPack name="@PRODUCT_NAME@" />
   </shortcut>
   <shortcut applications="no" commandLine="nogui stop" description="Stop Nuxeo"
-    desktop="yes" iconFile="images/icon-stop.ico" iconIndex="0" initialState="noShow"
-    name="Stop Nuxeo" programGroup="yes" startMenu="no" startup="no"
-    target="$INSTALL_PATH/bin/nuxeoctl" workingDirectory="$INSTALL_PATH">
+    desktop="yes" iconFile="$INSTALL_PATH/images/icon-stop.ico" iconIndex="0"
+    initialState="noShow" name="Stop Nuxeo" programGroup="yes" startMenu="no"
+    startup="no" target="$INSTALL_PATH/bin/nuxeoctl" workingDirectory="$INSTALL_PATH">
     <createForPack name="@PRODUCT_NAME@" />
   </shortcut>
-  <shortcut name="Uninstall"
-    target="${INSTALL_PATH}/bin/uninstaller.jar" commandLine=""
-    workingDirectory="$INSTALL_PATH" description="Uninstall Nuxeo" initialState="normal"
-    programGroup="yes" desktop="no" applications="no" startMenu="no" startup="no">
+  <shortcut name="Uninstall" target="${INSTALL_PATH}/bin/uninstaller.jar"
+    commandLine="" workingDirectory="$INSTALL_PATH" description="Uninstall Nuxeo"
+    initialState="normal" programGroup="yes" desktop="no" applications="no"
+    startMenu="no" startup="no">
     <createForPack name="@PRODUCT_NAME@" />
   </shortcut>
 </shortcuts>
