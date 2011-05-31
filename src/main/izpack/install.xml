@@ -101,22 +101,29 @@
       installGroups="Nuxeo">
       <description>@PRODUCT_NAME@ @PRODUCT_VERSION@ @SERVER@</description>
       <fileset dir="@PRODUCT_BASEDIR@" targetdir="$INSTALL_PATH" />
-      <file src="images/icon-controlpanel.png" targetDir="$INSTALL_PATH/images/">
+      <file src="images/icon-controlpanel.png" targetdir="$INSTALL_PATH/images/">
         <os family="unix" />
       </file>
-      <file src="images/icon-start.png" targetDir="$INSTALL_PATH/images/">
+      <file src="images/icon-start.png" targetdir="$INSTALL_PATH/images/">
         <os family="unix" />
       </file>
-      <file src="images/icon-stop.png" targetDir="$INSTALL_PATH/images/">
+      <file src="images/icon-stop.png" targetdir="$INSTALL_PATH/images/">
         <os family="unix" />
       </file>
-      <file src="images/icon-controlpanel.ico" targetDir="$INSTALL_PATH/images/">
+      <file src="setPermissions.bat" targetdir="$INSTALL_PATH/">
         <os family="windows" />
       </file>
-      <file src="images/icon-start.ico" targetDir="$INSTALL_PATH/images/">
+      <executable failure="warn" keep="false" stage="postinstall"
+        targetfile="$INSTALL_PATH/setPermissions.bat">
+        <os family="windows" />
+      </executable>
+      <file src="images/icon-controlpanel.ico" targetdir="$INSTALL_PATH/images/">
         <os family="windows" />
       </file>
-      <file src="images/icon-stop.ico" targetDir="$INSTALL_PATH/images/">
+      <file src="images/icon-start.ico" targetdir="$INSTALL_PATH/images/">
+        <os family="windows" />
+      </file>
+      <file src="images/icon-stop.ico" targetdir="$INSTALL_PATH/images/">
         <os family="windows" />
       </file>
       <executable failure="warn" keep="true" stage="never"

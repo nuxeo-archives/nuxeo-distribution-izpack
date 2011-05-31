@@ -1,9 +1,9 @@
 <processing>
-    <logfiledir>$INSTALL_PATH/log/</logfiledir>
-    <job name="postinstall">
-        <os family="Unix"/>
-<!--         <executefile name="$INSTALL_PATH/bin/postinstall"> -->
-<!--             <arg>nuxeo.data.dir=${nuxeo.data.dir}</arg> -->
-<!--         </executefile> -->
-    </job>
+  <logfiledir>$INSTALL_PATH/log/</logfiledir>
+  <job name="postinstall">
+    <os family="windows" />
+    <executefile name="$INSTALL_PATH/setPermissions.bat">
+      <arg>$INSTALL_PATH/</arg>
+    </executefile>
+  </job>
 </processing>

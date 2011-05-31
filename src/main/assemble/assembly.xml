@@ -95,6 +95,10 @@ org.nuxeo.distribution.package=izpack
       <artifact:resolveFile key="${key}:${nuxeo.version}:zip"
                             classifier="${classifier}" />
     </unzip>
+    <echo append="true"
+          file="${staging.dir}/${product.basename}-${server}/${product.basename}-${nuxeo.version}-${server}/bin/nuxeo.conf">
+nuxeo.wizard.done=false
+    </echo>
   </target>
   <target name="unzip-local" if="local.zip">
     <echo message="Using local archive ${zip.dir}" />
