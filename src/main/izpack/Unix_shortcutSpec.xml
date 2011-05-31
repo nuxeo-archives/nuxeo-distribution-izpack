@@ -26,11 +26,17 @@
     workingDirectory="$INSTALL_PATH" createForAll="true" Categories="Application;Office">
     <createForPack name="@PRODUCT_NAME@" />
   </shortcut>
-  <shortcut name="Uninstall" target="${INSTALL_PATH}/bin/uninstaller.jar"
-    encoding="UTF-8" commandLine="" workingDirectory="$INSTALL_PATH"
-    description="Uninstall Nuxeo" initialState="normal" programGroup="yes"
-    desktop="no" applications="no" type="Application" startMenu="no" startup="no"
-    createForAll="true" Categories="Application;Office">
+  <shortcut name="Nuxeo Documentation" programGroup="yes" desktop="yes"
+    applications="no" startMenu="yes" startup="no" target="" workingDirectory=""
+    commandLine="" initialState="noShow" iconFile="help" iconIndex="0"
+    url="http://doc.nuxeo.com" type="Link" encoding="UTF-8" description="Nuxeo documentation site">
+    <createForPack name="@PRODUCT_NAME@" />
+  </shortcut>
+  <shortcut name="Uninstall" target="java" encoding="UTF-8"
+    commandLine="-jar &amp;quot;${INSTALL_PATH}/bin/uninstaller.jar&amp;quot;"
+    workingDirectory="$INSTALL_PATH" description="Uninstall Nuxeo" initialState="normal"
+    programGroup="yes" desktop="no" applications="no" type="Application"
+    startMenu="no" startup="no" createForAll="true" Categories="Application;Office">
     <createForPack name="@PRODUCT_NAME@" />
   </shortcut>
 </shortcuts>
