@@ -141,6 +141,8 @@
       <executable failure="warn" keep="true" stage="never"
         targetfile="$INSTALL_PATH/bin/Start Nuxeo.command" />
       <executable failure="warn" keep="true" stage="never"
+        targetfile="$INSTALL_PATH/Start Nuxeo.command" />
+      <executable failure="warn" keep="true" stage="never"
         targetfile="$INSTALL_PATH/bin/Stop Nuxeo.command" />
       <updatecheck>
         <exclude name="$INSTALL_PATH/bin/nuxeo.conf" />
