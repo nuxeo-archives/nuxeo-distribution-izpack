@@ -29,9 +29,9 @@
     url="http://doc.nuxeo.com" type="Link" encoding="UTF-8" description="Nuxeo documentation site">
     <createForPack name="@PRODUCT_NAME@" />
   </shortcut>
-  <shortcut name="Uninstall" target="java"
-    commandLine="-jar &amp;quot;${INSTALL_PATH}/bin/uninstaller.jar&amp;quot;"
-    workingDirectory="$INSTALL_PATH" description="Uninstall Nuxeo" initialState="normal"
+  <shortcut name="Uninstall @PRODUCT_NAME@ @PRODUCT_VERSION@" target="java"
+    commandLine="-jar '${INSTALL_PATH}/bin/uninstaller.jar'" workingDirectory="$INSTALL_PATH"
+    description="Uninstall @PRODUCT_NAME@ @PRODUCT_VERSION@" initialState="normal"
     programGroup="yes" desktop="no" applications="yes" startMenu="no" startup="no">
     <createForPack name="@PRODUCT_NAME@" />
   </shortcut>
