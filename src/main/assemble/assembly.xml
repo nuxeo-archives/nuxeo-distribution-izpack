@@ -53,6 +53,7 @@
              value="org.nuxeo.ecm.distribution:nuxeo-distribution-tomcat" />
       <param name="classifier" value="nuxeo-cap" />
     </antcall>
+    <!--
     <antcall target="prepare-izpack-resources">
       <param name="product.name" value="Nuxeo CoreServer" />
       <param name="product.basename" value="nuxeo-coreserver" />
@@ -61,6 +62,7 @@
              value="org.nuxeo.ecm.distribution:nuxeo-distribution-tomcat" />
       <param name="classifier" value="coreserver" />
     </antcall>
+    -->
   </target>
 
   <target name="prepare-izpack-resources">

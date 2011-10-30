@@ -169,6 +169,7 @@
               <output>${project.build.directory}/nuxeo-cap-${nuxeo.version}-tomcat-izpack-installer.jar</output>
             </configuration>
           </execution>
+          <!--
           <execution>
             <id>coreserver-tomcat-installer</id>
             <phase>package</phase>
@@ -181,6 +182,7 @@
               <output>${project.build.directory}/nuxeo-coreserver-${nuxeo.version}-tomcat-izpack-installer.jar</output>
             </configuration>
           </execution>
+          -->
         </executions>
       </plugin>
       <plugin>
