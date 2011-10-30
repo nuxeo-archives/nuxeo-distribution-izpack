@@ -26,5 +26,7 @@ for jarinstaller in target/nuxeo*.jar; do
     PREFIX=${BASH_REMATCH[1]}
     NXVERSION=${BASH_REMATCH[2]}
     SUFFIX=${BASH_REMATCH[3]}
-    python $IZPACK_WRAPPERS_PATH/izpack2exe/izpack2exe.py --file=target/$PREFIX$NXVERSION$SUFFIX.jar --output=target/$PREFIX$NXVERSION$SUFFIX.exe
+    pushd target
+    python $IZPACK_WRAPPERS_PATH/izpack2exe/izpack2exe.py --file=$PREFIX$NXVERSION$SUFFIX.jar --output=$PREFIX$NXVERSION$SUFFIX.exe
+    popd
 done
